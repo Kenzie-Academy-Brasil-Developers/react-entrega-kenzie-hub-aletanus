@@ -4,11 +4,10 @@ import { useForm } from 'react-hook-form'
 import { yupResolver} from '@hookform/resolvers/yup'
 import { Input } from '../../Components/Input'
 import { registerSchema } from './registerSchema'
-// import { api } from "../../api/api"
-import { toast } from 'react-toastify'
+import { api } from "../../Api"
 import { Navbar } from '../../Components/Navbar'
 
-export const RegisterPage = () => {
+export const RegisterPage = ({ toast }) => {
 
   const navigate = useNavigate ()
   const [loading, setLoading] = useState(false); 
@@ -17,24 +16,34 @@ export const RegisterPage = () => {
     resolver: yupResolver(registerSchema)
   });  
 
-
-  /* oneOf (yup.ref("password")) */
   const userRegister = async (formData) => {
+
     try {
+
       setLoading(true);  
-      const response = await api.post('user', formData);
-      toast.success(response.data.message);
+      const response = await api.post('users', formData);
+      // toast.success(`Seja bem vindo${response.data.name}`);
+      console.log (response)
+      console.log (response.data.name)
       navigate ("/")
     } catch (error) {
-      toast.error(error.response.data.error);  
+
+      // toast.error(error.response.data.error);  
+      toast.error(error.response)  
+      console.log (error.response)
+      console.log (error.response.data.message)
     } finally {
+
       setLoading(false);  
     }
   }
 
   const submit = async (data) => {
+
+    console.log (data)
+
     await userRegister(data);
-    //Se estiver vazio, o reset vai resetar todos os campos
+
     reset({
         name: "",
         email: "",
@@ -42,6 +51,7 @@ export const RegisterPage = () => {
         passwordConfirm: "",
         bio: "",
         contact: "",
+        module: "Primeiro Módulo",
         // module: event.target.children[1].value,
     });
   }
@@ -50,11 +60,7 @@ export const RegisterPage = () => {
 
     <>
 
-      {/* <h1>/// REGISTER ///</h1> */}
-
       <Navbar to={"/"} linkName="Voltar" type="" hidden={false}/>
-
-      {/* to, alt, name, type, hidden */}
 
       <main>
 
@@ -78,31 +84,18 @@ export const RegisterPage = () => {
           <Input type="text" id="bio" label="Bio " placeholder="Fale sobre você" register={register("bio")} disabled={loading} />
           {errors.bio && <p aria-label="Error: Bio text needed">{errors.bio.message}</p>}
                 
-          <Input type="number" id="contact" label="Contato " placeholder="Opção de contato" register={register("contact")} disabled={loading} />
+          <Input type="string" id="contact" label="Contato " placeholder="Opção de contato" register={register("contact")} disabled={loading} />
           {errors.contact && <p aria-label="Error: contact">{errors.contact.message}</p>}
                 
           <fieldset>
-            <label htmlFor="module">Módulo </label>
-            <select id="module" {...register("module")}>
+            <label htmlFor="course_module">Módulo </label>
+            <select id="course_module" {...register("course_module")}>
               <option key="Primeiro módulo" value="Primeiro módulo (Introdução ao Frontend)">Primeiro módulo</option>
               <option key="Segundo módulo" value="Segundo módulo (Frontend Avançado)">Segundo módulo</option>
               <option key="Terceiro módulo" value="Terceiro módulo (Introdução ao Backend)">Terceiro módulo</option>
               <option key="Quarto módulo" value="Quarto módulo (Backend Avançado)">Quarto módulo</option> 
             </select>
           </fieldset>
-                
-                
-          {/* <select value={formData.category} onChange={(event) => setFormData({ ...formData, category: event.target.value })}>
-                    
-            <option key="Primeiro módulo" value={category.value}>Primeiro módulo (Introdução ao Frontend)</option>
-                    
-            {categoryList.map((category) => (
-              <option key={category.value} value={category.value}>
-                {category.label}
-              </option>
-            ))}
-                    
-          </select> */}
                 
           <button type="submit" disabled={loading}>
             {loading ? 'Cadastrando...' : 'Cadastrar'}
@@ -115,5 +108,3 @@ export const RegisterPage = () => {
     </>  
   )
 }
-
-// export default RegisterPage

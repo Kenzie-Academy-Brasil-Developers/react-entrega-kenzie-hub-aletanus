@@ -9,27 +9,32 @@ import { Navbar } from '../../Components/Navbar'
 import { Header } from '../../Components/Header'
 import { TechSkill } from '../../Components/TechSkill'
           
-export const DashboardPage = () => {
+export const DashboardPage = ({ toast, loggedUser, setLoggedUser  }) => {
 
   const [loading, setLoading] = useState(false); 
+
 //   const { register, handleSubmit, formState: {errors}, reset } = useForm({
 //     mode: "onChange",
 //     resolver: yupResolver(registerSchema)
 //   });  
 
 
-  /* oneOf (yup.ref("password")) */
-//   const userRegister = async (formData) => {
-//     try {
-//       setLoading(true);  
-//       const response = await api.post('user', formData);
-//       toast.success(response.data.message);
-//     } catch (error) {
-//       toast.error(error.response.data.error);  
-//     } finally {
-//       setLoading(false);  
-//     }
-//   }
+// useEffect (() => {
+  //   const getApi = async () => {
+
+  //     try {
+  //         const resp = await api.get("")
+  //         setProducts (resp.data)
+  //         setAllProducts (resp.data)
+  //     } catch (error) {
+  //         console.log(error)
+  //     } finally {
+  //         setLoading (true)
+  //     }
+  //   }
+  //   getApi ()
+  // }, []);
+  
 
   const submit = async (data) => {
     await userRegister(data);
@@ -50,7 +55,7 @@ export const DashboardPage = () => {
     <>
 
       <Navbar linkName="Sair" type="" to={"/"}/>
-      <Header username="Username" pDescription="User's Module" hidden={true}/>
+      <Header username="Username" pDescription="Course Module" hidden={true}/>
 
       <main>
 

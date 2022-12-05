@@ -1,38 +1,53 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from "react"
 import { useForm } from 'react-hook-form'
 import { yupResolver} from '@hookform/resolvers/yup'
 import { Input } from '../../Components/Input'
 import { loginSchema } from './loginSchema'
-// import { api } from "../../api/api"
-import { toast } from 'react-toastify'
+import { api } from "../../Api"
 import { Navbar } from '../../Components/Navbar'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-export const LoginPage = () => {
+export const LoginPage = ({ toast, loggedUser, setLoggedUser  }) => {
 
   const [loading, setLoading] = useState(false); 
+  const navigate = useNavigate ()
   const { register, handleSubmit, formState: {errors}, reset } = useForm({
     mode: "onChange",
     resolver: yupResolver(loginSchema)
   });  
 
+  const userLogin = async (formData) => {
 
-  /* oneOf (yup.ref("password")) */
-  const userRegister = async (formData) => {
     try {
+
       setLoading(true);  
-      const response = await api.post('user', formData);
-      toast.success(response.data.message);
+      const response = await api.post("sessions", formData)
+      const usersToken = response.data.token
+      
+      if (usersToken) {
+        setLoggedUser ({usersToken:usersToken, usersData:response.data.user})
+        // navigate("/dashboard")
+      }
+
     } catch (error) {
-      toast.error(error.response.data.error);  
+      // toast.error(error.response.data.message)
+      console.log (error.response.data.message) 
+
     } finally {
       setLoading(false);  
     }
   }
 
+  useEffect(() => {
+    localStorage.setItem("@LOGGED-USER", JSON.stringify(loggedUser));
+  }, [loggedUser]);
+
   const submit = async (data) => {
-    await userRegister(data);
-    //Se estiver vazio, o reset vai resetar todos os campos
+
+    console.log (data)
+
+    await userLogin(data);
+
     reset({
         email: "",
         password: "",
