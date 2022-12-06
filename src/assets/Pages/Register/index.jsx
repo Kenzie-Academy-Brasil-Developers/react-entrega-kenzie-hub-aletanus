@@ -19,21 +19,23 @@ export const RegisterPage = ({ toast }) => {
   const userRegister = async (formData) => {
 
     try {
-
       setLoading(true);  
       const response = await api.post('users', formData);
-      // toast.success(`Seja bem vindo${response.data.name}`);
-      console.log (response)
-      console.log (response.data.name)
-      navigate ("/")
-    } catch (error) {
-
-      // toast.error(error.response.data.error);  
+      if (response) {
+        setTimeout (() => {
+          toast.success(`Oi ${(response.data.name).toUpperCase()}! Agora faça o seu login.`);
+          console.log (response)
+          console.log (response.data.name)
+        }, 100)
+        setTimeout (() => {
+          navigate ("/")
+        }, 4000)
+      }
+    } catch (error) { 
       toast.error(error.response)  
       console.log (error.response)
       console.log (error.response.data.message)
     } finally {
-
       setLoading(false);  
     }
   }
@@ -45,14 +47,13 @@ export const RegisterPage = ({ toast }) => {
     await userRegister(data);
 
     reset({
-        name: "",
-        email: "",
-        password: "",
-        passwordConfirm: "",
-        bio: "",
-        contact: "",
-        module: "Primeiro Módulo",
-        // module: event.target.children[1].value,
+      name: "",
+      email: "",
+      password: "",
+      passwordConfirm: "",
+      bio: "",
+      contact: "",
+      module: "Primeiro Módulo",
     });
   }
 

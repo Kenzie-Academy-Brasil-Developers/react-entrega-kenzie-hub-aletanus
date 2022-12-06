@@ -1,8 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import logo from "../../../assets/Logo.svg"
 
-export const Navbar = ({ to, alt, linkName, type, hidden }) => {
+export const Navbar = ({ onClick, aTitle, type }) => {
   
   return (
 
@@ -11,8 +10,7 @@ export const Navbar = ({ to, alt, linkName, type, hidden }) => {
       <figure>
           <img src={logo} alt="Kenzie Hub logo" />
       </figure>
-    
-      <Link to={to} hidden={hidden}>{linkName}</Link>
+      <a onClick={onClick} type={type} >{aTitle}</a>
 
     </nav>
     

@@ -1,5 +1,5 @@
 
-export const Header = ({username, pDescription, buttonTitle, onClick, type, hidden}) => {
+export const Header = ({ username, pDescription, buttonTitle, onClick, type, hidden}) => {
 
     return (
         

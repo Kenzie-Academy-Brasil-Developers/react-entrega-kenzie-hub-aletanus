@@ -1,74 +1,96 @@
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { yupResolver} from '@hookform/resolvers/yup'
-import { Input } from '../../Components/Input'
-// import { registerSchema } from './registerSchema'
-// import { api } from "../../api/api"
-import { toast } from 'react-toastify'
+import React, { useState, useEffect } from 'react'
+import { api } from "../../Api"
 import { Navbar } from '../../Components/Navbar'
 import { Header } from '../../Components/Header'
 import { TechSkill } from '../../Components/TechSkill'
+import { useNavigate } from 'react-router-dom'
           
-export const DashboardPage = ({ toast, loggedUser, setLoggedUser  }) => {
+export const DashboardPage = ({ toast }) => {
 
   const [loading, setLoading] = useState(false); 
+  const [loggedUserData, setloggedUserData] = useState([]);
+  const navigate = useNavigate ()
 
-//   const { register, handleSubmit, formState: {errors}, reset } = useForm({
-//     mode: "onChange",
-//     resolver: yupResolver(registerSchema)
-//   });  
+  useEffect(() => {
+    const userToken = localStorage.getItem('@USER.TOKEN');
+    if (userToken) {
 
+      const getApi = async () => {
 
-// useEffect (() => {
-  //   const getApi = async () => {
-
-  //     try {
-  //         const resp = await api.get("")
-  //         setProducts (resp.data)
-  //         setAllProducts (resp.data)
-  //     } catch (error) {
-  //         console.log(error)
-  //     } finally {
-  //         setLoading (true)
-  //     }
-  //   }
-  //   getApi ()
-  // }, []);
+        try { 
+          const response = await api.get("/profile", { 
+            headers: {"Authorization" : `Bearer ${userToken}`}
+          })
   
+          setloggedUserData ({
+            username: response.data.name,
+            userCourseModule: response.data.course_module,
+            userTecs: response.data.techs,
+            userBio: response.data.bio,
+          })
 
-  const submit = async (data) => {
-    await userRegister(data);
-    //Se estiver vazio, o reset vai resetar todos os campos
-    reset({
-        name: "",
-        email: "",
-        password: "",
-        passwordConfirm: "",
-        bio: "",
-        contact: "",
-        // module: event.target.children[1].value,
-    });
+        } catch (error) {
+          console.log(error)
+
+        } finally {
+          setLoading (true)
+        }
+      }
+      getApi ()
+    }
+  }, []);  
+
+  const logout = (even) => {
+
+    even.preventDefault ()
+    localStorage.removeItem("@USER.TOKEN")
+    localStorage.removeItem("@USER.ID")
+    setTimeout (() => {
+      toast.success(`Até logo ${(loggedUserData.username).toUpperCase()}!`)
+    }, 100)
+    setTimeout (() => {
+      navigate ("/")
+    }, 4000)
+  }
+
+  const addSkill = (even) => {
+
+    even.preventDefault ()
+    console.log ("Add a skill")
+
   }
 
   return (
 
     <>
 
-      <Navbar linkName="Sair" type="" to={"/"}/>
-      <Header username="Username" pDescription="Course Module" hidden={true}/>
+      {!loading ? ( <h1>...loading</h1>) : (
+                  
+        <>
 
-      <main>
-
-        <Header h2Title="Tecnologias" buttonTitle="+" onClick={() => submit()} type="button" />
-                
-        <article>
-            <section>
+          <Navbar aTitle="Sair" type="" onClick={(even) => logout(even)} />
+          <Header 
+            username={`${loggedUserData.username}`} 
+            pDescription={`${loggedUserData.userCourseModule}`} 
+            hidden={true}
+          />
+  
+          <main>
+  
+            <Header h2Title="Tecnologias" buttonTitle="+" type="button" onClick={(even) => addSkill(even)} />
+                  
+            <article>
+              <section>
                 <TechSkill tecnologyName={"Utilize o botão "+" para adicionar a primeira tecnologia à sua lista de competências."} type="button" hidden={true} />
-            </section>
-        </article>
+              </section>
+            </article>
+  
+          </main>
+        </>
 
-      </main>
+      )}
 
     </>  
   )
+
 }

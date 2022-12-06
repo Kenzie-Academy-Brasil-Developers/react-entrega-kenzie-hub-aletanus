@@ -7,7 +7,7 @@ import { api } from "../../Api"
 import { Navbar } from '../../Components/Navbar'
 import { Link, useNavigate } from 'react-router-dom'
 
-export const LoginPage = ({ toast, loggedUser, setLoggedUser  }) => {
+export const LoginPage = ({ toast }) => {
 
   const [loading, setLoading] = useState(false); 
   const navigate = useNavigate ()
@@ -25,12 +25,21 @@ export const LoginPage = ({ toast, loggedUser, setLoggedUser  }) => {
       const usersToken = response.data.token
       
       if (usersToken) {
-        setLoggedUser ({usersToken:usersToken, usersData:response.data.user})
-        // navigate("/dashboard")
+        
+        setTimeout (() => {
+          localStorage.setItem ("@USER.TOKEN",usersToken)
+          localStorage.setItem ("@USER.ID",response.data.user.id)
+          toast.success(`Seja bem vindo ${(response.data.user.name).toUpperCase()}! Vamos redirecionar você para a sua página inicial.`)
+        }, 100)
+  
+        setTimeout (() => {
+          navigate("/dashboard")
+        }, 4000)
+
       }
 
     } catch (error) {
-      // toast.error(error.response.data.message)
+      toast.error(error.response.data.message)
       console.log (error.response.data.message) 
 
     } finally {
@@ -38,13 +47,7 @@ export const LoginPage = ({ toast, loggedUser, setLoggedUser  }) => {
     }
   }
 
-  useEffect(() => {
-    localStorage.setItem("@LOGGED-USER", JSON.stringify(loggedUser));
-  }, [loggedUser]);
-
   const submit = async (data) => {
-
-    console.log (data)
 
     await userLogin(data);
 
