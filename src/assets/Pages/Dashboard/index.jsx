@@ -1,44 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { api } from "../../Api"
 import { Navbar } from '../../Components/Navbar'
 import { Header } from '../../Components/Header'
 import { TechSkill } from '../../Components/TechSkill'
-import { useNavigate } from 'react-router-dom'
+import { UserContext } from "../../../Context/userContext"
+import { useContext } from "react" 
           
-export const DashboardPage = ({ toast }) => {
+export const DashboardPage = ( ) => {
 
-  const [loading, setLoading] = useState(false); 
-  const [loggedUserData, setloggedUserData] = useState([]);
-  const navigate = useNavigate ()
+  const { toast, navigate, requestLoggedUserData, loggedUserData, loading } = useContext (UserContext)
 
-  useEffect(() => {
-    const userToken = localStorage.getItem('@USER.TOKEN');
-    if (userToken) {
-
-      const getApi = async () => {
-
-        try { 
-          const response = await api.get("/profile", { 
-            headers: {"Authorization" : `Bearer ${userToken}`}
-          })
-  
-          setloggedUserData ({
-            username: response.data.name,
-            userCourseModule: response.data.course_module,
-            userTecs: response.data.techs,
-            userBio: response.data.bio,
-          })
-
-        } catch (error) {
-          console.log(error)
-
-        } finally {
-          setLoading (true)
-        }
-      }
-      getApi ()
-    }
-  }, []);  
+  requestLoggedUserData ()
 
   const logout = (even) => {
 
@@ -46,7 +17,7 @@ export const DashboardPage = ({ toast }) => {
     localStorage.removeItem("@USER.TOKEN")
     localStorage.removeItem("@USER.ID")
     setTimeout (() => {
-      toast.success(`Até logo ${(loggedUserData.username).toUpperCase()}!`)
+      toast.success(`${(loggedUserData.username).toUpperCase()}, até logo!`)
     }, 100)
     setTimeout (() => {
       navigate ("/")
@@ -68,7 +39,7 @@ export const DashboardPage = ({ toast }) => {
                   
         <>
 
-          <Navbar aTitle="Sair" type="" onClick={(even) => logout(even)} />
+          <Navbar buttonTitle="Sair" type="" onClick={(even) => logout(even)} />
           <Header 
             username={`${loggedUserData.username}`} 
             pDescription={`${loggedUserData.userCourseModule}`} 

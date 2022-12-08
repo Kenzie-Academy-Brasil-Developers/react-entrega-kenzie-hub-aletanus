@@ -1,11 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { LoginPage } from "./assets/Pages/Login"
 import { RegisterPage } from "./assets/Pages/Register"
 import { DashboardPage } from "./assets/Pages/Dashboard"
 import { NotFoundPage } from "./assets/Pages/NotFound"
 import React, { useState } from "react"
+import { ToastContainer } from "react-toastify";
 // import React from "react"
 // import "./App.css"
 
@@ -19,9 +18,9 @@ function App () {
     <div className="App">
 
       <Routes>
-        <Route path="/" element= {<LoginPage toast={toast} />} />
-        <Route path="/register" element= {<RegisterPage toast={toast} />} />
-        <Route path="/dashboard" element= {<DashboardPage toast={toast} />} />
+        <Route path="/" element= {<LoginPage/>} />
+        <Route path="/register" element= {<RegisterPage/>} />
+        <Route path="/dashboard" element= {<DashboardPage/>} />
         <Route path="*" element= {<NotFoundPage/>} />
       </Routes>
 

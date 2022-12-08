@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from "../../../assets/Logo.svg"
 
-export const Navbar = ({ onClick, aTitle, type }) => {
+export const Navbar = ({ onClick, buttonTitle, type, hidden }) => {
   
   return (
 
@@ -10,7 +10,7 @@ export const Navbar = ({ onClick, aTitle, type }) => {
       <figure>
           <img src={logo} alt="Kenzie Hub logo" />
       </figure>
-      <a onClick={onClick} type={type} >{aTitle}</a>
+      <button onClick={onClick} type={type} hidden={hidden} >{buttonTitle}</button>
 
     </nav>
     

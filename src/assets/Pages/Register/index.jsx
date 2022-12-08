@@ -1,47 +1,26 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navbar } from '../../Components/Navbar'
+import { Input } from '../../Components/Input'
+import { useState } from "react";
 import { useForm } from 'react-hook-form'
 import { yupResolver} from '@hookform/resolvers/yup'
-import { Input } from '../../Components/Input'
-import { registerSchema } from './registerSchema'
-import { api } from "../../Api"
-import { Navbar } from '../../Components/Navbar'
+import { registerSchema } from "./registerSchema"
+import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../../../Context/userContext'
+import { useContext } from 'react'
 
-export const RegisterPage = ({ toast }) => {
+export const RegisterPage = () => {
 
-  const navigate = useNavigate ()
-  const [loading, setLoading] = useState(false); 
-  const { register, handleSubmit, formState: {errors}, reset } = useForm({
-    mode: "onChange",
-    resolver: yupResolver(registerSchema)
-  });  
+  const { userRegister } = useContext (UserContext)
 
-  const userRegister = async (formData) => {
-
-    try {
-      setLoading(true);  
-      const response = await api.post('users', formData);
-      if (response) {
-        setTimeout (() => {
-          toast.success(`Oi ${(response.data.name).toUpperCase()}! Agora faça o seu login.`);
-          console.log (response)
-          console.log (response.data.name)
-        }, 100)
-        setTimeout (() => {
-          navigate ("/")
-        }, 4000)
-      }
-    } catch (error) { 
-      toast.error(error.response)  
-      console.log (error.response)
-      console.log (error.response.data.message)
-    } finally {
-      setLoading(false);  
-    }
-  }
+    const navigate = useNavigate ()
+    const [loading, setLoading] = useState(false); 
+    const { register, handleSubmit, formState: {errors}, reset } = useForm({
+      mode: "onChange",
+      resolver: yupResolver(registerSchema)
+  }); 
 
   const submit = async (data) => {
-
+  
     console.log (data)
 
     await userRegister(data);
@@ -57,11 +36,17 @@ export const RegisterPage = ({ toast }) => {
     });
   }
 
+  const returnPage = (event) => {
+    
+    event.preventDefault()
+    navigate ("/")
+  }
+
   return (
 
     <>
 
-      <Navbar to={"/"} linkName="Voltar" type="" hidden={false}/>
+      <Navbar onClick={(event) => (returnPage(event))} buttonTitle="Voltar" type="" hidden={false}/>
 
       <main>
 
