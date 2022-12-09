@@ -4,9 +4,12 @@ import { useState } from "react";
 import { useForm } from 'react-hook-form'
 import { yupResolver} from '@hookform/resolvers/yup'
 import { registerSchema } from "./registerSchema"
-import { useNavigate } from 'react-router-dom'
+import { Form, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../../Context/userContext'
 import { useContext } from 'react'
+import { StyledForm } from '../../../Styles/form-style';
+import { StyledButton } from '../../../Styles/buttons-style';
+import { StyledRegister } from './style';
 
 export const RegisterPage = () => {
 
@@ -44,16 +47,16 @@ export const RegisterPage = () => {
 
   return (
 
-    <>
+    <StyledRegister>
 
       <Navbar onClick={(event) => (returnPage(event))} buttonTitle="Voltar" type="" hidden={false}/>
 
       <main>
 
         <h2>Crie sua conta</h2>
-        <p>Rapido e grátis, vamos nessa!</p>
+        <p className='p'>Rapido e grátis, vamos nessa!</p>
                 
-        <form noValidate onSubmit={handleSubmit(submit)}>
+        <StyledForm noValidate onSubmit={handleSubmit(submit)}>
                 
           <Input type="text" id="name" label="Nome " placeholder="Digite aqui o seu nome" register={register("name")} disabled={loading}/>
           {errors.name && <p aria-label="Error: Name">{errors.name.message}</p>}
@@ -83,14 +86,14 @@ export const RegisterPage = () => {
             </select>
           </fieldset>
                 
-          <button type="submit" disabled={loading}>
+          <StyledButton className='pink-button' type="submit" disabled={loading}>
             {loading ? 'Cadastrando...' : 'Cadastrar'}
-          </button>
+          </StyledButton>
                 
-        </form> 
+        </StyledForm> 
                 
       </main>
 
-    </>  
+    </StyledRegister>  
   )
 }

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledRegister = styled.div`
+export const StyledLoginPage = styled.div`
     
     display: flex;
     align-items: center;
@@ -16,17 +16,6 @@ export const StyledRegister = styled.div`
         flex-direction: column;
         margin-top: 35px;
         padding: 42px 22px;
-    }
-
-    nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-        width: 100%;
-    }
-
-    nav > .gray-button{
-        width: fit-content;
     }
 
     main > h2 {

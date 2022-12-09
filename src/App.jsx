@@ -5,6 +5,8 @@ import { DashboardPage } from "./assets/Pages/Dashboard"
 import { NotFoundPage } from "./assets/Pages/NotFound"
 import React, { useState } from "react"
 import { ToastContainer } from "react-toastify";
+import { GlobalStyle } from "./Styles/Global-styles";
+// import { StyledApp } from "./App.js";
 // import React from "react"
 // import "./App.css"
 
@@ -23,6 +25,8 @@ function App () {
         <Route path="/dashboard" element= {<DashboardPage/>} />
         <Route path="*" element= {<NotFoundPage/>} />
       </Routes>
+
+      <GlobalStyle/>
 
       <ToastContainer
         position="top-right"

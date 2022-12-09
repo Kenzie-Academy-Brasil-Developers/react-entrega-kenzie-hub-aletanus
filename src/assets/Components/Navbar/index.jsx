@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from "../../../assets/Logo.svg"
+import { StyledButton } from '../../../Styles/buttons-style'
 
 export const Navbar = ({ onClick, buttonTitle, type, hidden }) => {
   
@@ -10,7 +11,7 @@ export const Navbar = ({ onClick, buttonTitle, type, hidden }) => {
       <figure>
           <img src={logo} alt="Kenzie Hub logo" />
       </figure>
-      <button onClick={onClick} type={type} hidden={hidden} >{buttonTitle}</button>
+      <StyledButton className="gray-button" onClick={onClick} type={type} hidden={hidden} >{buttonTitle}</StyledButton>
 
     </nav>
     
