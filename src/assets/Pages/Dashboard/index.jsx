@@ -51,11 +51,11 @@ export const DashboardPage = ( ) => {
   
           <main>
   
-            <Header  id="h2"className="p" username="Tecnologias" pDescription="+" type="button" onClick={(even) => addSkill(even)} />
+            <Header  id="h2"className="p" username="Tecnologias" buttonTitle="+" type="button" onClick={(even) => addSkill(even)} />
                   
             <article>
               <section>
-                <TechSkill tecnologyName={"Utilize o botão "+" para adicionar a primeira tecnologia à sua lista de competências."} type="button" hidden={true} />
+                <TechSkill tecnologyName={`Utilize o botão "${ "+" }"  para adicionar a primeira tecnologia à sua lista de competências.`} type="button" hidden={true} />
               </section>
             </article>
   

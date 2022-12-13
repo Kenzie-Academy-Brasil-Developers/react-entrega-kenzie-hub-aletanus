@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from "../../../assets/Trash-Delete-Icon.svg"
 
-export const TechSkill = ({ tecnologyName, level, type, hidden, onClick }) => {
+export const TechSkill = ({ className, tecnologyName, level, type, hidden, onClick }) => {
   
   return (
 
@@ -11,7 +11,7 @@ export const TechSkill = ({ tecnologyName, level, type, hidden, onClick }) => {
 
       <p hidden={hidden} >{level}</p>
 
-      <button type={type} hidden={hidden} onClick={onClick} >
+      <button className={className} type={type} hidden={hidden} onClick={onClick} >
         <figure>
           <img src={logo} alt="Trash" />
         </figure>
