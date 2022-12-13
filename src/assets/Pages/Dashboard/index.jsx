@@ -4,7 +4,8 @@ import { Header } from '../../Components/Header'
 import { TechSkill } from '../../Components/TechSkill'
 import { UserContext } from "../../../Context/userContext"
 import { useContext } from "react" 
-          
+import { StyledPageTemplate } from '../../../Styles/page-template'
+
 export const DashboardPage = ( ) => {
 
   const { toast, navigate, requestLoggedUserData, loggedUserData, loading } = useContext (UserContext)
@@ -37,18 +38,20 @@ export const DashboardPage = ( ) => {
 
       {!loading ? ( <h1>...loading</h1>) : (
                   
-        <>
+        <StyledPageTemplate>
 
           <Navbar buttonTitle="Sair" type="" onClick={(even) => logout(even)} />
           <Header 
-            username={`${loggedUserData.username}`} 
-            pDescription={`${loggedUserData.userCourseModule}`} 
+            username={`Olá, ${loggedUserData.username}!`} 
+            pDescription={`${(loggedUserData.userCourseModule)}`} 
             hidden={true}
+            id="h2"
+            className="p"
           />
   
           <main>
   
-            <Header h2Title="Tecnologias" buttonTitle="+" type="button" onClick={(even) => addSkill(even)} />
+            <Header  id="h2"className="p" username="Tecnologias" pDescription="+" type="button" onClick={(even) => addSkill(even)} />
                   
             <article>
               <section>
@@ -57,7 +60,7 @@ export const DashboardPage = ( ) => {
             </article>
   
           </main>
-        </>
+        </StyledPageTemplate>
 
       )}
 

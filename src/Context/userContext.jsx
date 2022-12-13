@@ -21,7 +21,7 @@ export const UserProvider = ({ children }) => {
           setTimeout (() => {
             localStorage.setItem ("@USER.TOKEN",usersToken)
             localStorage.setItem ("@USER.ID",response.data.user.id)
-            toast.success(`${(response.data.user.name).toUpperCase()}, seja bem vindo!`)
+            toast.success(`${(response.data.user.name).toUpperCase().trim()}, seja bem vindo!`)
           }, 100)
           setTimeout (() => {
             navigate("/dashboard")
