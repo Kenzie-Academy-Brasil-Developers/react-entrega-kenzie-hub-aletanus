@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const StyledPageTemplate = styled.div`
-    
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin: 114px 12px 50px;
-
+    /* margin: 114px 12px 50px; */
+    margin: 0px 12px 50px;
+    
     main {
         /* background-color: var(--grey-3); */
         /* border: solid 1px var(--grey-3); */
@@ -15,7 +15,7 @@ export const StyledPageTemplate = styled.div`
         align-items: center;
         flex-direction: column;
         border-top: solid 1px var(--grey-3);
-        padding-top: 18px
+        padding-top: 18px;
         /* margin-top: 35px; */
         /* padding: 42px 22px; */
     }
@@ -26,7 +26,8 @@ export const StyledPageTemplate = styled.div`
         justify-content: space-between;
         width: 100%;
         border-bottom: solid 1px var(--grey-3);
-        margin-bottom: 18px
+        margin-bottom: 18px;
+        margin-top: 18px;
     }
 
     nav > .gray-button {

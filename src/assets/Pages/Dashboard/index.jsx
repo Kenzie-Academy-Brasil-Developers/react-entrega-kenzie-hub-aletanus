@@ -6,11 +6,14 @@ import { UserContext } from "../../../Context/userContext"
 import { TechContext } from '../../../Context/techContext'
 import { useContext } from "react" 
 import { StyledPageTemplate } from '../../../Styles/page-template'
+import { ModalCreateTecnology } from './Modal'
 
 export const DashboardPage = ( ) => {
 
   const { toast, navigate, requestLoggedUserData, loggedUserData, loading} = useContext (UserContext)
-  const { allUsersTechSkills, setAllUsersTechSkills} = useContext (TechContext)
+  const { registerUsersTechSkill, allUsersTechSkills, setAllUsersTechSkills} = useContext (TechContext)
+  const [modalCreateTecnology, setModalCreateTecnology] = useState (false)
+  
   requestLoggedUserData ()
 
   const logout = (even) => {
@@ -29,6 +32,7 @@ export const DashboardPage = ( ) => {
   const addSkill = (even) => {
     even.preventDefault ()
     console.log ("Add a skill")
+    setModalCreateTecnology (true)
   }
 
   return (
@@ -38,6 +42,10 @@ export const DashboardPage = ( ) => {
       {!loading ? ( <h1>...loading</h1>) : (
                   
         <StyledPageTemplate>
+
+          {
+            !modalCreateTecnology ? (<></>) : (<ModalCreateTecnology registerUsersTechSkill={registerUsersTechSkill} onClick={() => (setModalCreateTecnology (false))} />)
+          }
 
           <Navbar buttonTitle="Sair" type="" onClick={(even) => logout(even)} />
           <Header 
@@ -64,6 +72,8 @@ export const DashboardPage = ( ) => {
             </article>
   
           </main>
+
+          
         </StyledPageTemplate>
 
       )}
