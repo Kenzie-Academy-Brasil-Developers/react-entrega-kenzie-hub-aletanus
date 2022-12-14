@@ -3,13 +3,14 @@ import { Navbar } from '../../Components/Navbar'
 import { Header } from '../../Components/Header'
 import { TechSkill } from '../../Components/TechSkill'
 import { UserContext } from "../../../Context/userContext"
+import { TechContext } from '../../../Context/techContext'
 import { useContext } from "react" 
 import { StyledPageTemplate } from '../../../Styles/page-template'
 
 export const DashboardPage = ( ) => {
 
-  const { toast, navigate, requestLoggedUserData, loggedUserData, loading } = useContext (UserContext)
-
+  const { toast, navigate, requestLoggedUserData, loggedUserData, loading} = useContext (UserContext)
+  const { allUsersTechSkills, setAllUsersTechSkills} = useContext (TechContext)
   requestLoggedUserData ()
 
   const logout = (even) => {
@@ -26,10 +27,8 @@ export const DashboardPage = ( ) => {
   }
 
   const addSkill = (even) => {
-
     even.preventDefault ()
     console.log ("Add a skill")
-
   }
 
   return (
@@ -55,7 +54,12 @@ export const DashboardPage = ( ) => {
                   
             <article>
               <section>
-                <TechSkill tecnologyName={`Utilize o botão "${ "+" }"  para adicionar a primeira tecnologia à sua lista de competências.`} type="button" hidden={true} />
+                {
+                  !allUsersTechSkills.length ? 
+                  (<TechSkill tecnologyName={`Utilize o botão "${ "+" }"  para adicionar a sua primeira tecnologia.`} type="button" hidden={true} />) 
+                  : (<TechSkill tecnologyName={`Tech" ${ "Xxx" }"`} level={`Level "${ "X" }"`} type="button"  />)
+                }
+                
               </section>
             </article>
   

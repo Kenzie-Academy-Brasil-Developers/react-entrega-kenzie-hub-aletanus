@@ -29,7 +29,7 @@ export const StyledPageTemplate = styled.div`
         margin-bottom: 18px
     }
 
-    nav > .gray-button{
+    nav > .gray-button {
         width: fit-content;
     }
     
@@ -103,6 +103,8 @@ export const StyledPageTemplate = styled.div`
 
     
     article > section {
+        display: flex;
+        justify-content: space-between;
         background-color: var(--grey-4);
         font-size: var(--unit-rem-18);
         font-weight: var(--font-weight-7);
@@ -121,15 +123,29 @@ export const StyledPageTemplate = styled.div`
         line-height: var(--font-line-height-1);
     }
 
-    article > section > p {
-        /* color: var(--grey-0);
-        font-size: var(--unit-rem-18);
-        font-weight: var(--font-weight-7);
-        line-height: var(--font-line-height-1); */
+    article > section > div {
+        display: flex;
+        gap: 32px;
     }
 
-    article > section > button {
-     
+    article > section {
+        display: flex;
+        gap: 10px;
+    }
+
+    article > section > p {
+        color: var(--grey-1);
+        font-size: var(--unit-rem-14);
+        font-weight: var(--font-weight-6);
+        line-height: var(--font-line-height-1);
+    }
+
+    article > section button > figure {
+        height: 16px;
+    }
+
+    article > section button > figure > img {
+        height: 100%;
     }
 
 
