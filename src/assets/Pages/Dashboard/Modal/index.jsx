@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TechContext } from "../../../../Context/techContext";
 import { useForm } from 'react-hook-form'
 import { yupResolver} from '@hookform/resolvers/yup'
 import { techSchema } from './techSchema';
@@ -8,7 +9,11 @@ import { Input } from "../../../Components/Input";
 import { StyledModalCreateTecnology } from "./style";
 import { StyledButton } from "../../../../Styles/buttons-style";
 
-export const ModalCreateTecnology = ({ registerUsersTechSkill, onClick }) => {
+export const ModalCreateTecnology = () => {
+
+
+    const { registerUsersTechSkill, usersTechSkills, modal, setModal } =
+    useContext(TechContext);
 
     const [loading, setLoading] = useState(false); 
     const { register, handleSubmit, formState: {errors}, reset } = useForm ({
@@ -20,7 +25,7 @@ export const ModalCreateTecnology = ({ registerUsersTechSkill, onClick }) => {
 
         console.log(data)
 
-        await registerUsersTechSkill (data)
+        registerUsersTechSkill (data)
     
         reset({
             title: "",
@@ -35,7 +40,7 @@ export const ModalCreateTecnology = ({ registerUsersTechSkill, onClick }) => {
         <div>
 
             <Header 
-                onClick={onClick}
+                onClick={() => setModal(false)}
                 username="Cadastrar Tecnologia"
                 buttonTitle="x"
                 id="h2"

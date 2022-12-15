@@ -4,20 +4,15 @@ export const StyledPageTemplate = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    /* margin: 114px 12px 50px; */
     margin: 0px 12px 50px;
     
     main {
-        /* background-color: var(--grey-3); */
-        /* border: solid 1px var(--grey-3); */
         border-radius: var(--radius-1);
         display: flex;
         align-items: center;
         flex-direction: column;
         border-top: solid 1px var(--grey-3);
         padding-top: 18px;
-        /* margin-top: 35px; */
-        /* padding: 42px 22px; */
     }
 
     nav {
@@ -73,8 +68,6 @@ export const StyledPageTemplate = styled.div`
 
         height: 32px;
         width: 32px;
-        /* margin: 0 0 22px;
-        padding: 0 16px; */
     }
 
     main > header > button:hover {
@@ -94,60 +87,93 @@ export const StyledPageTemplate = styled.div`
         margin: 0 0 22px 0;
     }
 
-    article {
+    section {
         background-color: var(--grey-3);
         border: solid 1px var(--grey-3);
         border-radius: var(--radius-1);
-        width: 100%;
         padding:22px;
+        width: 100%;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        font-size: var(--unit-rem-18);
+        font-weight: var(--font-weight-7);
+        line-height: var(--font-line-height-1);
+        gap: 16px;
     }
 
     
-    article > section {
+    li {
         display: flex;
+        align-items: center;
         justify-content: space-between;
         background-color: var(--grey-4);
-        font-size: var(--unit-rem-18);
-        font-weight: var(--font-weight-7);
-        line-height: var(--font-line-height-1);
-        padding:22px;
+        border: solid 1px var(--grey-4);
+        border-radius: var(--radius-1);
+        padding: 13px 22px;
     }
-    
-    article > section:hover {
+
+    li:hover {
         background-color: var(--grey-2);
+        border: solid 1px var(--grey-2);
+        transition: 0.4s;
     }
 
-    article > section > h3 {
+
+    li >  h3 {
         color: var(--grey-0);
-        font-size: var(--unit-rem-18);
+        font-size: var(--unit-rem-14);
         font-weight: var(--font-weight-7);
         line-height: var(--font-line-height-1);
     }
 
-    article > section > div {
+    li >  div {
         display: flex;
-        gap: 32px;
-    }
-
-    article > section {
-        display: flex;
+        align-items: center;
         gap: 10px;
     }
 
-    article > section > p {
+    li  {
+        display: flex;
+        gap: 10px;
+
+        height: 47px;
+    }
+
+    li > div > p {
         color: var(--grey-1);
-        font-size: var(--unit-rem-14);
-        font-weight: var(--font-weight-6);
+        font-size: var(--unit-rem-12);
+        font-weight: var(--font-weight-4);
         line-height: var(--font-line-height-1);
     }
 
-    article > section button > figure {
-        height: 16px;
+    li > div > div {
+        display: flex;
+        gap: 2px;
     }
 
-    article > section button > figure > img {
+    li > div > div > button {
+        
+        border: solid 1px var(--total-opacity);
+    }
+
+    li > div > div > button:hover {
+        border-radius: var(--radius-1);
+        border: solid 1px var(--grey-1);
+        transition: 0.4s;
+    }
+
+    li > div > div > button > figure {
+        margin: 3px;
+        height: 14px;
+    }
+
+    li > div > div > button > figure > img {
         height: 100%;
     }
+
 
 
     /* @media (min-width: 1024px) {

@@ -1,84 +1,96 @@
-import React, { useState, useEffect } from 'react'
-import { Navbar } from '../../Components/Navbar'
-import { Header } from '../../Components/Header'
-import { TechSkill } from '../../Components/TechSkill'
-import { UserContext } from "../../../Context/userContext"
-import { TechContext } from '../../../Context/techContext'
-import { useContext } from "react" 
-import { StyledPageTemplate } from '../../../Styles/page-template'
-import { ModalCreateTecnology } from './Modal'
+import React, { useState, useEffect } from "react";
+import { Navbar } from "../../Components/Navbar";
+import { Header } from "../../Components/Header";
+import { TechSkill } from "../../Components/TechSkill";
+import { UserContext } from "../../../Context/userContext";
+import { TechContext } from "../../../Context/techContext";
+import { useContext } from "react";
+import { StyledPageTemplate } from "../../../Styles/page-template";
+import { ModalCreateTecnology } from "./Modal";
 
-export const DashboardPage = ( ) => {
+export const DashboardPage = () => {
+  const {
+    toast,
+    navigate,
+    loggedUserData,
+    setloggedUserData,
+    loading,
+    navigateToLogin,
+  } = useContext(UserContext);
 
-  const { toast, navigate, requestLoggedUserData, loggedUserData, loading} = useContext (UserContext)
-  const { registerUsersTechSkill, allUsersTechSkills, setAllUsersTechSkills} = useContext (TechContext)
-  const [modalCreateTecnology, setModalCreateTecnology] = useState (false)
-  
-  requestLoggedUserData ()
+  const { registerUsersTechSkill, modal, setModal } =
+    useContext(TechContext);
+
+  console.log(loggedUserData);
 
   const logout = (even) => {
-
-    even.preventDefault ()
-    localStorage.removeItem("@USER.TOKEN")
-    localStorage.removeItem("@USER.ID")
-    setTimeout (() => {
-      toast.success(`${(loggedUserData.username).toUpperCase()}, até logo!`)
-    }, 100)
-    setTimeout (() => {
-      navigate ("/")
-    }, 4000)
-  }
-
-  const addSkill = (even) => {
-    even.preventDefault ()
-    console.log ("Add a skill")
-    setModalCreateTecnology (true)
-  }
+    even.preventDefault();
+    localStorage.removeItem("@USER.TOKEN");
+    localStorage.removeItem("@USER.ID");
+    setTimeout(() => {
+      toast.success(`${loggedUserData.name.toUpperCase().trim()}, até logo!`);
+    }, 100);
+    setTimeout(() => {
+      setloggedUserData(null);
+      navigate("/");
+    }, 4000);
+  };
 
   return (
-
     <>
-
-      {!loading ? ( <h1>...loading</h1>) : (
-                  
+      {loggedUserData && (
         <StyledPageTemplate>
-
-          {
-            !modalCreateTecnology ? (<></>) : (<ModalCreateTecnology registerUsersTechSkill={registerUsersTechSkill} onClick={() => (setModalCreateTecnology (false))} />)
-          }
-
           <Navbar buttonTitle="Sair" type="" onClick={(even) => logout(even)} />
-          <Header 
-            username={`Olá, ${loggedUserData.username}!`} 
-            pDescription={`${(loggedUserData.userCourseModule)}`} 
+          <Header
+            username={`Olá, ${loggedUserData.name}!`}
+            pDescription={`${loggedUserData.course_module}`}
             hidden={true}
             id="h2"
             className="p"
           />
-  
+
           <main>
-  
-            <Header  id="h2"className="p" username="Tecnologias" buttonTitle="+" type="button" onClick={(even) => addSkill(even)} />
-                  
-            <article>
-              <section>
-                {
-                  !allUsersTechSkills.length ? 
-                  (<TechSkill tecnologyName={`Utilize o botão "${ "+" }"  para adicionar a sua primeira tecnologia.`} type="button" hidden={true} />) 
-                  : (<TechSkill tecnologyName={`Tech" ${ "Xxx" }"`} level={`Level "${ "X" }"`} type="button"  />)
-                }
-                
-              </section>
-            </article>
-  
+            <Header
+              id="h2"
+              className="p"
+              username="Tecnologias"
+              buttonTitle="+"
+              type="button"
+              onClick={() => setModal(true)}
+            />
+
+            <section>
+              <article>
+                <ul>
+                  {!loggedUserData.techs ? (
+                    <TechSkill
+                      tecnologyName={`Utilize o botão "${"+"}"  para adicionar a sua primeira tecnologia.`}
+                      type="button"
+                      hidden={true}
+                    />
+                  ) : (
+                    loggedUserData.techs.map((tech) => (
+                      <TechSkill
+                        tech={tech}
+                        key={`${tech.id}`}
+                        tecnologyName={`${tech.title}`}
+                        level={`${tech.status}`}
+                        type="button"
+                      />
+                    ))
+                  )}
+                </ul>
+              </article>
+            </section>
           </main>
 
-          
+          {modal && (
+            <ModalCreateTecnology
+              registerUsersTechSkill={registerUsersTechSkill}
+            />
+          )}
         </StyledPageTemplate>
-
       )}
-
-    </>  
-  )
-
-}
+    </>
+  );
+};

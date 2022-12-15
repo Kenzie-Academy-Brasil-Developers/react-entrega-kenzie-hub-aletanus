@@ -1,31 +1,55 @@
-import React from 'react'
-import trashLogo from "../../../assets/Trash-Delete-Icon.svg"
-import editLogo from "../../../assets/Edit-Icon.png"
+import { React, useContext } from "react";
+import trashLogo from "../../../assets/Trash-Delete-Icon.svg";
+import editLogo from "../../../assets/Edit-Icon.png";
+import { TechContext } from "../../../Context/techContext";
 
-export const TechSkill = ({ className, tecnologyName, level, type, hidden, onClick }) => {
+export const TechSkill = ({
   
+  className,
+  tecnologyName,
+  level,
+  type,
+  hidden,
+  onClick,
+  tech,
+}) => {
+
+  console.log(tech.id)
+
+  const { registerUsersTechSkill, modal, setModal, modalEdit, setModalEdit, techDelete } =
+  useContext (TechContext);
+
   return (
-
-    <>
-
+    <li >
       <h3>{tecnologyName}</h3>
 
-        <p hidden={hidden} >{level}</p>
-        
+      <div>
+        <p hidden={hidden}>{level}</p>
 
-          {/* <button className={className} type={type} hidden={hidden} onClick={onClick} >
+        <div>
+          <button
+            className={className}
+            type={type}
+            hidden={hidden}
+            onClick={() => setModalEdit(true)}
+          >
             <figure>
               <img src={editLogo} alt="Edit" />
             </figure>
           </button>
-    
-          <button className={className} type={type} hidden={hidden} onClick={onClick} >
+
+          <button
+            className={className}
+            type={type}
+            hidden={hidden}
+            onClick={() => techDelete(tech.id)}
+          >
             <figure>
               <img src={trashLogo} alt="Trash" />
             </figure>
-          </button> */}
-
-    </>
-    
-  )
-}
+          </button>
+        </div>
+      </div>
+    </li>
+  );
+};

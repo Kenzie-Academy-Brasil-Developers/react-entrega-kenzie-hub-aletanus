@@ -39,6 +39,7 @@ export const GlobalStyle = createGlobalStyle`
     --color-primary-focus: #FF427F;
     --color-primary-negative: #59323F;
     --backgroud-opacity: #12121478;
+    --total-opacity: rgba(255 255 255 / 0%);
     --grey-0: #F8F9FA;
     --grey-1: #868E96;
     --grey-2: #343B41;
