@@ -1,18 +1,15 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom"
 import { LoginPage } from "./assets/Pages/Login"
 import { RegisterPage } from "./assets/Pages/Register"
 import { DashboardPage } from "./assets/Pages/Dashboard"
 import { NotFoundPage } from "./assets/Pages/NotFound"
 import React, { useState } from "react"
-import { ToastContainer } from "react-toastify";
-import { GlobalStyle } from "./Styles/Global-styles";
-// import { StyledApp } from "./App.js";
-// import React from "react"
-// import "./App.css"
+import { ToastContainer } from "react-toastify"
+import { GlobalStyle } from "./Styles/Global-styles"
 
-function App () {
+const App = () => {
 
-  const localStorageLoggedUser = localStorage.getItem("@LOGGED-USER");
+  const localStorageLoggedUser = localStorage.getItem("@LOGGED-USER")
   const [loggedUser, setLoggedUser] = useState(localStorageLoggedUser ? JSON.parse(localStorageLoggedUser) : [])
 
   return (

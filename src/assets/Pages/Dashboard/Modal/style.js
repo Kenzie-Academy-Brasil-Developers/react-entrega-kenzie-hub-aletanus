@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const StyledModalCreateTecnology = styled.div`
 
@@ -50,4 +50,4 @@ export const StyledModalCreateTecnology = styled.div`
         width: 100%;
     }
 
-`;
+`

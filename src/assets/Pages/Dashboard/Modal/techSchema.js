@@ -1,4 +1,4 @@
-import * as yup from "yup";
+import * as yup from "yup"
 
 export const techSchema = yup.object().shape({
 
@@ -9,4 +9,4 @@ export const techSchema = yup.object().shape({
 
     status: yup.string().required("Selecione um status"),
 
-});
+})

@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react"
 import logo from "../../../assets/Logo.svg"
-import { StyledButton } from '../../../Styles/buttons-style'
+import { StyledButton } from "../../../Styles/buttons-style"
 
 export const Navbar = ({ onClick, buttonTitle, type, hidden }) => {
   

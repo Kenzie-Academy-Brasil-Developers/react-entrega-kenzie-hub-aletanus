@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Link } from 'react-router-dom'
+import styled from "styled-components"
+import { Link } from "react-router-dom"
 
 export const StyledButton = styled.button`
     
@@ -85,4 +85,4 @@ export const StyledLink = styled(Link)`
         border: solid 1px var(--grey-2);
     }
 
-`;
+`

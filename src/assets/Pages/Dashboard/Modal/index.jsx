@@ -1,19 +1,18 @@
-import { useContext, useState } from "react";
-import { TechContext } from "../../../../Context/techContext";
-import { useForm } from 'react-hook-form'
-import { yupResolver} from '@hookform/resolvers/yup'
-import { techSchema } from './techSchema';
-import { StyledForm } from "../../../../Styles/form-style";
-import { Header } from "../../../Components/Header";
-import { Input } from "../../../Components/Input";
-import { StyledModalCreateTecnology } from "./style";
-import { StyledButton } from "../../../../Styles/buttons-style";
+import { useContext, useState } from "react"
+import { TechContext } from "../../../../Context/techContext"
+import { useForm } from "react-hook-form"
+import { yupResolver} from "@hookform/resolvers/yup"
+import { techSchema } from "./techSchema"
+import { StyledForm } from "../../../../Styles/form-style"
+import { Header } from "../../../Components/Header"
+import { Input } from "../../../Components/Input"
+import { StyledModalCreateTecnology } from "./style"
+import { StyledButton } from "../../../../Styles/buttons-style"
 
 export const ModalCreateTecnology = () => {
 
-
-    const { registerUsersTechSkill, usersTechSkills, modal, setModal } =
-    useContext(TechContext);
+    const { registerUsersTechSkill, setModal } =
+    useContext(TechContext)
 
     const [loading, setLoading] = useState(false); 
     const { register, handleSubmit, formState: {errors}, reset } = useForm ({

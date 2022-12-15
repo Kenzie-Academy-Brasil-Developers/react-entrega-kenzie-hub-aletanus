@@ -1,15 +1,15 @@
-import { Navbar } from '../../Components/Navbar'
-import { Input } from '../../Components/Input'
-import { useState } from "react";
-import { useForm } from 'react-hook-form'
-import { yupResolver} from '@hookform/resolvers/yup'
+import { Navbar } from "../../Components/Navbar"
+import { Input } from "../../Components/Input"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { yupResolver} from "@hookform/resolvers/yup"
 import { registerSchema } from "./registerSchema"
-import { Form, useNavigate } from 'react-router-dom'
-import { UserContext } from '../../../Context/userContext'
-import { useContext } from 'react'
-import { StyledForm } from '../../../Styles/form-style';
-import { StyledButton } from '../../../Styles/buttons-style';
-import { StyledRegister } from './style';
+import { Form, useNavigate } from "react-router-dom"
+import { UserContext } from "../../../Context/userContext"
+import { useContext } from "react"
+import { StyledForm } from "../../../Styles/form-style"
+import { StyledButton } from "../../../Styles/buttons-style"
+import { StyledRegister } from "./style"
 
 export const RegisterPage = () => {
 

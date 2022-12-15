@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Navbar } from "../../Components/Navbar";
-import { Header } from "../../Components/Header";
-import { TechSkill } from "../../Components/TechSkill";
-import { UserContext } from "../../../Context/userContext";
-import { TechContext } from "../../../Context/techContext";
-import { useContext } from "react";
-import { StyledPageTemplate } from "../../../Styles/page-template";
-import { ModalCreateTecnology } from "./Modal";
+import React, { useState, useEffect } from "react"
+import { Navbar } from "../../Components/Navbar"
+import { Header } from "../../Components/Header"
+import { TechSkill } from "../../Components/TechSkill"
+import { UserContext } from "../../../Context/userContext"
+import { TechContext } from "../../../Context/techContext"
+import { useContext } from "react"
+import { StyledPageTemplate } from "../../../Styles/page-template"
+import { ModalCreateTecnology } from "./Modal"
 
 export const DashboardPage = () => {
   const {
@@ -14,26 +14,21 @@ export const DashboardPage = () => {
     navigate,
     loggedUserData,
     setloggedUserData,
-    loading,
-    navigateToLogin,
   } = useContext(UserContext);
 
   const { registerUsersTechSkill, modal, setModal } =
-    useContext(TechContext);
-
-  console.log(loggedUserData);
+  useContext(TechContext)
 
   const logout = (even) => {
-    even.preventDefault();
-    localStorage.removeItem("@USER.TOKEN");
-    localStorage.removeItem("@USER.ID");
+    even.preventDefault()
+    localStorage.removeItem("@USER.TOKEN")
+    localStorage.removeItem("@USER.ID")
+    toast.success(`${loggedUserData.name.toUpperCase().trim()}, até logo!`)
+  
     setTimeout(() => {
-      toast.success(`${loggedUserData.name.toUpperCase().trim()}, até logo!`);
-    }, 100);
-    setTimeout(() => {
-      setloggedUserData(null);
-      navigate("/");
-    }, 4000);
+      setloggedUserData(null)
+      navigate("/")
+    }, 4000)
   };
 
   return (
@@ -62,7 +57,7 @@ export const DashboardPage = () => {
             <section>
               <article>
                 <ul>
-                  {!loggedUserData.techs ? (
+                  { !loggedUserData?.techs.length ? (
                     <TechSkill
                       tecnologyName={`Utilize o botão "${"+"}"  para adicionar a sua primeira tecnologia.`}
                       type="button"
@@ -92,5 +87,5 @@ export const DashboardPage = () => {
         </StyledPageTemplate>
       )}
     </>
-  );
-};
+  )
+}

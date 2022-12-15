@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const StyledLoginPage = styled.div`
     
@@ -37,7 +37,6 @@ export const StyledLoginPage = styled.div`
         font-weight: var(--font-weight-6);
         margin: 0 0 22px 0;
     }
-
 
     /* @media (min-width: 1024px) {
     }

@@ -1,4 +1,4 @@
-import * as yup from "yup";
+import * as yup from "yup"
 
 export const registerSchema = yup.object().shape({
     name: yup
@@ -38,4 +38,4 @@ export const registerSchema = yup.object().shape({
     .min(3, "O contato precisa ter ao menos 3 caracteres"),
 
     course_module: yup.string().required("Escolha um módulo"),
-});
+})

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 
 export const Input = ({ id, label, type, register, placeholder, disabled, autoComplete }) => {
   

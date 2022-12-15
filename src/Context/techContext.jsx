@@ -1,20 +1,19 @@
-import { api } from "../assets/Api";
-import { useEffect, useState, createContext } from "react";
-// import { useNavigate } from 'react-router-dom'
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { UserContext } from "../../src/Context/userContext";
-import { useContext } from "react";
+import { api } from "../assets/Api"
+import { useEffect, useState, createContext } from "react"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+import { UserContext } from "../../src/Context/userContext"
+import { useContext } from "react"
 
-export const TechContext = createContext();
+export const TechContext = createContext()
 
 export const TechProvider = ({ children }) => {
 
-  const { loggedUserData, setloggedUserData, setLoading } = useContext(UserContext);
-  const [usersTechSkills, setUsersTechSkills] = useState([]);
-  const [modal, setModal] = useState(false);
-  const [modalEdit, setModalEdit] = useState(false);
-  const [modalDelete, setModalDelete] = useState(false);
+  const { loggedUserData, setloggedUserData, setLoading } = useContext(UserContext)
+  const [usersTechSkills, setUsersTechSkills] = useState([])
+  const [modal, setModal] = useState(false)
+  const [modalEdit, setModalEdit] = useState(false)
+  const [modalDelete, setModalDelete] = useState(false)
   const userToken = localStorage.getItem("@USER.TOKEN")
   
   console.log(loggedUserData)
@@ -35,20 +34,20 @@ export const TechProvider = ({ children }) => {
           setModal(false)
 
         } catch (error) {
-          console.log(error);
+          console.log(error)
         } finally {
-          setLoading(false);
+          setLoading(false)
         }
       };
       getApi()
     }
-  }, [usersTechSkills]);
+  }, [usersTechSkills])
 
   const registerUsersTechSkill = async (formData) => {
 
     if (userToken) {
-      console.log(userToken);
-      console.log(formData);
+      console.log(userToken)
+      console.log(formData)
 
       const getApi = async () => {
         try {
@@ -56,7 +55,7 @@ export const TechProvider = ({ children }) => {
             headers: { Authorization: `Bearer ${userToken}` },
           });
 
-          console.log(response);
+          console.log(response)
 
           toast.success(
             `${loggedUserData.name.toUpperCase().trim()}, nova tecnologia adicionada.`
@@ -67,16 +66,19 @@ export const TechProvider = ({ children }) => {
             loggedUserData.userTecs,
           ]);
         } catch (error) {
-          console.log(error);
+          console.log(error)
+          toast.success(
+            `${loggedUserData.name.toUpperCase().trim()}, ${error.response.data.message}.`
+          )
         } finally {
-          setModal(false);
+          setModal(false)
         }
-      };
-      getApi();
+      }
+      getApi()
     } else {
       // navigate ("/")
     }
-  };
+  }
 
   const techDelete = async (techId) => {
 
@@ -92,7 +94,7 @@ export const TechProvider = ({ children }) => {
 
         toast.success(
           `${loggedUserData.name.toUpperCase().trim()}, tecnologia excluída.`
-        );
+        )
 
         setUsersTechSkills([
           ...usersTechSkills,
@@ -100,9 +102,9 @@ export const TechProvider = ({ children }) => {
         ])
 
       } catch (error) {
-        console.log(error);
+        console.log(error)
       } finally {
-        setModal(false);
+        setModal(false)
       }
   }
 
@@ -121,5 +123,5 @@ export const TechProvider = ({ children }) => {
     >
       {children}
     </TechContext.Provider>
-  );
-};
+  )
+}

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const StyledForm = styled.form`
     
@@ -56,4 +56,4 @@ export const StyledForm = styled.form`
         margin: 22px 0;
     }
 
-`;
+`

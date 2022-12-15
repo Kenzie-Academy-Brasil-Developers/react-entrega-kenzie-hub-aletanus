@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const StyledLoginPage = styled.div`
     
@@ -42,20 +42,8 @@ export const StyledLoginPage = styled.div`
     /* @media (min-width: 1024px) {
     }
     @media (min-width: 2000px){
-
     }
     @media (min-width: 2700px){
     } */
 
-`;
-
-// export const StyledUl = styled.ul`
-    
-
-//     /* @media (min-width: 1024px){
-//     } 
-//     @media (min-width: 2000px){
-   
-//     } */
-    
-// `;
+`

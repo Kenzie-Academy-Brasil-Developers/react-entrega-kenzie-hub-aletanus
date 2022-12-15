@@ -1,7 +1,7 @@
-import { React, useContext } from "react";
-import trashLogo from "../../../assets/Trash-Delete-Icon.svg";
-import editLogo from "../../../assets/Edit-Icon.png";
-import { TechContext } from "../../../Context/techContext";
+import { React, useContext } from "react"
+import trashLogo from "../../../assets/Trash-Delete-Icon.svg"
+import editLogo from "../../../assets/Edit-Icon.png"
+import { TechContext } from "../../../Context/techContext"
 
 export const TechSkill = ({
   
@@ -14,10 +14,8 @@ export const TechSkill = ({
   tech,
 }) => {
 
-  console.log(tech.id)
-
   const { registerUsersTechSkill, modal, setModal, modalEdit, setModalEdit, techDelete } =
-  useContext (TechContext);
+  useContext (TechContext)
 
   return (
     <li >

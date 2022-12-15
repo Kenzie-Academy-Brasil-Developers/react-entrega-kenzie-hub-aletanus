@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const StyledPageTemplate = styled.div`
     display: flex;
@@ -174,25 +174,17 @@ export const StyledPageTemplate = styled.div`
         height: 100%;
     }
 
-
-
-    /* @media (min-width: 1024px) {
+    /* @media (min-width: 768px) {  
+        margin: 0px 20% 50px;
     }
+
+    @media (min-width: 1024px) {
+    }
+
     @media (min-width: 2000px){
-
     }
+
     @media (min-width: 2700px){
     } */
 
-`;
-
-// export const StyledUl = styled.ul`
-    
-
-//     /* @media (min-width: 1024px){
-//     } 
-//     @media (min-width: 2000px){
-   
-//     } */
-    
-// `;
+`

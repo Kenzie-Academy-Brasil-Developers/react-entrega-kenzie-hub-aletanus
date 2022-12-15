@@ -1,9 +1,8 @@
-// import React, { useEffect, useState } from "react"
-import { useForm } from 'react-hook-form'
-import { yupResolver} from '@hookform/resolvers/yup'
-import { Input } from '../../Components/Input'
-import { loginSchema } from './loginSchema'
-import { Navbar } from '../../Components/Navbar'
+import { useForm } from "react-hook-form"
+import { yupResolver} from "@hookform/resolvers/yup"
+import { Input } from "../../Components/Input"
+import { loginSchema } from "./loginSchema"
+import { Navbar } from "../../Components/Navbar"
 import { UserContext } from "../../../Context/userContext"
 import { useContext } from "react" 
 import { StyledLoginPage } from "../Login/script"
@@ -17,16 +16,16 @@ export const LoginPage = ( ) => {
   const { register, handleSubmit, formState: {errors}, reset } = useForm ({
     mode: "onChange",
     resolver: yupResolver(loginSchema)
-  });
+  })
 
   const submit = async (data) => {
 
-    await userLogin(data);
+    await userLogin(data)
 
     reset({
         email: "",
         password: "",
-    });
+    })
   }
 
   return (

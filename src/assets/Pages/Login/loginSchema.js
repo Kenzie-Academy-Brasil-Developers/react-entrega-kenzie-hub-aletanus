@@ -1,4 +1,4 @@
-import * as yup from "yup";
+import * as yup from "yup"
 
 export const loginSchema = yup.object().shape({
 
@@ -16,4 +16,4 @@ export const loginSchema = yup.object().shape({
     .matches(/(?=.*?[#?!@$%^&*-])/, "É necessário ao menos um caractere especial")
     .min(8, "É necessário uma senha de ao menos 8 caracteres"),
 
-});
+})
