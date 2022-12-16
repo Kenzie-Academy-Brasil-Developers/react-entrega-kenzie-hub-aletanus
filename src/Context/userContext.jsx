@@ -1,4 +1,4 @@
-import { api } from "../assets/Api"
+import { api } from "../assets/Api" 
 import { useEffect, useState, createContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
@@ -8,13 +8,14 @@ export const UserContext = createContext()
 
 export const UserProvider = ({ children }) => {
 
-  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const navigateToLogin = useNavigate("/")
+  const userToken = localStorage.getItem("@USER.TOKEN")
+  const [loading, setLoading] = useState(false)
   const [loggedUserData, setloggedUserData] = useState(null)
 
   useEffect(() => {
-    const userToken = localStorage.getItem("@USER.TOKEN")
+    
     if (userToken) {
       const autoLogin = async () => {
         try {
@@ -34,6 +35,7 @@ export const UserProvider = ({ children }) => {
   }, [])
 
   const userLogin = async (formData) => {
+
     try {
       setLoading(true)
       const response = await api.post("sessions", formData)
@@ -56,6 +58,18 @@ export const UserProvider = ({ children }) => {
     } finally {
       setLoading(false)
     }
+  }
+
+  const logout = (even) => {
+    even.preventDefault()
+    localStorage.removeItem("@USER.TOKEN")
+    localStorage.removeItem("@USER.ID")
+    toast.success(`${loggedUserData.name.toUpperCase().trim()}, até logo!`)
+  
+    setTimeout(() => {
+      setloggedUserData(null)
+      navigate("/")
+    }, 4000)
   };
 
   const userRegister = async (formData) => {
@@ -90,6 +104,7 @@ export const UserProvider = ({ children }) => {
         navigate,
 
         userLogin,
+        logout,
         userRegister,
         loggedUserData,
         setloggedUserData,

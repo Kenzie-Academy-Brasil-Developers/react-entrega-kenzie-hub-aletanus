@@ -51,7 +51,7 @@ export const StyledForm = styled.form`
     .p-error {
         color: var(--alert);
         font-size: var(--unit-rem-12);
-        font-weight: var(--font-weight-4);
+        font-weight: var(--font-weight-7);
         line-height: var(--font-line-height-1);
         margin: 22px 0;
     }

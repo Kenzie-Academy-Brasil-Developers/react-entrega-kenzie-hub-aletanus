@@ -6,6 +6,7 @@ import { NotFoundPage } from "./assets/Pages/NotFound"
 import React, { useState } from "react"
 import { ToastContainer } from "react-toastify"
 import { GlobalStyle } from "./Styles/Global-styles"
+import { ProtectedRoutes } from "./Rotas/protectedRoutes"
 
 const App = () => {
 
@@ -19,7 +20,11 @@ const App = () => {
       <Routes>
         <Route path="/" element= {<LoginPage/>} />
         <Route path="/register" element= {<RegisterPage/>} />
-        <Route path="/dashboard" element= {<DashboardPage/>} />
+
+        <Route element={ <ProtectedRoutes/> }>
+          <Route path="/dashboard" element= {<DashboardPage/>} />
+        </Route>
+
         <Route path="*" element= {<NotFoundPage/>} />
       </Routes>
 

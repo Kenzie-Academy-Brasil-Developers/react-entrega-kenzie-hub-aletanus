@@ -7,29 +7,12 @@ import { TechContext } from "../../../Context/techContext"
 import { useContext } from "react"
 import { StyledPageTemplate } from "../../../Styles/page-template"
 import { ModalCreateTecnology } from "./Modal"
+import { ModalEditTecnology } from "./ModalEdit"
 
 export const DashboardPage = () => {
-  const {
-    toast,
-    navigate,
-    loggedUserData,
-    setloggedUserData,
-  } = useContext(UserContext);
 
-  const { registerUsersTechSkill, modal, setModal } =
-  useContext(TechContext)
-
-  const logout = (even) => {
-    even.preventDefault()
-    localStorage.removeItem("@USER.TOKEN")
-    localStorage.removeItem("@USER.ID")
-    toast.success(`${loggedUserData.name.toUpperCase().trim()}, até logo!`)
-  
-    setTimeout(() => {
-      setloggedUserData(null)
-      navigate("/")
-    }, 4000)
-  };
+  const { loggedUserData, logout } = useContext(UserContext);
+  const { registerUsersTechSkill, modal, setModal, editUsersTechSkill, modalEdit, setModalEdit } = useContext(TechContext)
 
   return (
     <>
@@ -37,7 +20,7 @@ export const DashboardPage = () => {
         <StyledPageTemplate>
           <Navbar buttonTitle="Sair" type="" onClick={(even) => logout(even)} />
           <Header
-            username={`Olá, ${loggedUserData.name}!`}
+            username={`Olá, ${loggedUserData.name.toUpperCase().trim()}!`}
             pDescription={`${loggedUserData.course_module}`}
             hidden={true}
             id="h2"
@@ -79,11 +62,21 @@ export const DashboardPage = () => {
             </section>
           </main>
 
-          {modal && (
+          { modal && (
             <ModalCreateTecnology
               registerUsersTechSkill={registerUsersTechSkill}
             />
-          )}
+            )
+          }
+
+          { modalEdit && (
+            <ModalEditTecnology
+              editUsersTechSkill={editUsersTechSkill}
+            />
+          )
+          
+          }
+
         </StyledPageTemplate>
       )}
     </>

@@ -1,4 +1,4 @@
-import { api } from "../assets/Api"
+import { api } from "../assets/Api" 
 import { useEffect, useState, createContext } from "react"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -13,7 +13,7 @@ export const TechProvider = ({ children }) => {
   const [usersTechSkills, setUsersTechSkills] = useState([])
   const [modal, setModal] = useState(false)
   const [modalEdit, setModalEdit] = useState(false)
-  const [modalDelete, setModalDelete] = useState(false)
+  const [techId, setTechId] = useState([])
   const userToken = localStorage.getItem("@USER.TOKEN")
   
   console.log(loggedUserData)
@@ -80,6 +80,44 @@ export const TechProvider = ({ children }) => {
     }
   }
 
+  const editUsersTechSkill = async (formData) => {
+
+    if (userToken) {
+      console.log(userToken)
+      console.log(formData)
+      console.log(techId)
+
+      const edit = async () => {
+        try {
+          const response = await api.put(`/users/techs/${techId}`, formData, {
+            headers: { Authorization: `Bearer ${userToken}` },
+          });
+
+          console.log(response)
+
+          toast.success(
+            `${loggedUserData.name.toUpperCase().trim()}, tecnologia editada!`
+          );
+
+          setUsersTechSkills([
+            ...usersTechSkills,
+            loggedUserData.userTecs,
+          ]);
+        } catch (error) {
+          console.log(error)
+          toast.success(
+            `${loggedUserData.name.toUpperCase().trim()}, ${error.response.data.message}.`
+          )
+        } finally {
+          setModalEdit(false)
+        }
+      }
+      edit()
+    } else {
+      // navigate ("/")
+    }
+  }
+
   const techDelete = async (techId) => {
 
     console.log(techId)
@@ -116,6 +154,8 @@ export const TechProvider = ({ children }) => {
         setUsersTechSkills,
         modal, 
         setModal,
+        editUsersTechSkill,
+        setTechId,
         modalEdit, 
         setModalEdit,
         techDelete,

@@ -2,53 +2,52 @@ import { useContext, useState } from "react"
 import { TechContext } from "../../../../Context/techContext"
 import { useForm } from "react-hook-form"
 import { yupResolver} from "@hookform/resolvers/yup"
-import { techSchema } from "./techSchema"
+import { editTechSchema } from "./editTechSchema" 
 import { StyledForm } from "../../../../Styles/form-style"
 import { Header } from "../../../Components/Header"
 import { Input } from "../../../Components/Input"
-import { StyledModalCreateTecnology } from "./style"
+import { StyledModalEditTecnology } from "./style"
 import { StyledButton } from "../../../../Styles/buttons-style"
 
-export const ModalCreateTecnology = () => {
+export const ModalEditTecnology = () => {
 
     const [loading, setLoading] = useState(false); 
-    const { registerUsersTechSkill, setModal } = useContext(TechContext)
+    const { editUsersTechSkill, modalEdit, setModalEdit } = useContext(TechContext)
     const { register, handleSubmit, formState: {errors}, reset } = useForm ({
         mode: "onChange",
-        resolver: yupResolver(techSchema)
+        resolver: yupResolver(editTechSchema)
     });
 
-    const submit = async (data) => {
+    const submit = async (newData) => {
 
-        console.log(data)
+        editUsersTechSkill (newData)
 
-        registerUsersTechSkill (data)
         reset({
             title: "",
             status: "",
-        });
+        })
     }
 
   return (
 
-    <StyledModalCreateTecnology>
+    <StyledModalEditTecnology>
 
         <div>
 
             <Header 
-                onClick={() => setModal(false)}
-                username="Cadastrar Tecnologia"
+                onClick={() => setModalEdit(false)}
+                username="Tecnologia Detalhes"
                 buttonTitle="x"
                 id="h2"
             />
 
             <StyledForm noValidate onSubmit={handleSubmit(submit)}>
 
-                <Input type="text" id="title" label="Title " placeholder="Digite aqui o seu nome" register={register("title")} disabled={loading}/>
+                <Input value="HTML" type="text" id="title" label="Nome do projeto" placeholder="Nome do projeto" register={register("title")} disabled={loading}/>
                 {errors.title && <p aria-label="Error: Title">{errors.title.message}</p>}
                 
                 <fieldset>
-                    <label htmlFor="status">Selecionar status </label>
+                    <label htmlFor="status">Status </label>
                     <select id="status" {...register("status")}>
                         <option key="Iniciante" value="Iniciante">Iniciante</option>
                         <option key="Intermediário" value="Intermediário">Intermediário</option>
@@ -57,14 +56,14 @@ export const ModalCreateTecnology = () => {
                 </fieldset>
 
                 <StyledButton className='pink-button' type="submit" disabled={loading}>
-                    {loading ? 'Cadastrando...' : 'Cadastrar Tecnologia'}
+                    {loading ? 'Cadastrando...' : 'Salvar alterações'}
                 </StyledButton>
 
             </StyledForm>
 
         </div>
 
-    </StyledModalCreateTecnology>
+    </StyledModalEditTecnology>
   )
 
 }
