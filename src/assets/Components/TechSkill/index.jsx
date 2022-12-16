@@ -14,7 +14,7 @@ export const TechSkill = ({
   
 }) => {
 
-  const { setModalEdit, setTechId, techDelete } = useContext (TechContext)
+  const { setModalEdit, setTech, techDelete } = useContext (TechContext)
 
   return (
     <li >
@@ -28,7 +28,7 @@ export const TechSkill = ({
             className={className}
             type={type}
             hidden={hidden}
-            onClick={() => (setModalEdit(true), setTechId(tech.id))}
+            onClick={() => (setModalEdit(true), setTech(tech))}
           >
             <figure>
               <img src={editLogo} alt="Edit"/>

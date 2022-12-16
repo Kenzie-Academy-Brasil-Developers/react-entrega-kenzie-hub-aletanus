@@ -13,7 +13,7 @@ export const TechProvider = ({ children }) => {
   const [usersTechSkills, setUsersTechSkills] = useState([])
   const [modal, setModal] = useState(false)
   const [modalEdit, setModalEdit] = useState(false)
-  const [techId, setTechId] = useState([])
+  const [tech, setTech] = useState([])
   const userToken = localStorage.getItem("@USER.TOKEN")
   
   console.log(loggedUserData)
@@ -46,20 +46,16 @@ export const TechProvider = ({ children }) => {
   const registerUsersTechSkill = async (formData) => {
 
     if (userToken) {
-      console.log(userToken)
-      console.log(formData)
 
       const getApi = async () => {
         try {
           const response = await api.post("/users/techs", formData, {
             headers: { Authorization: `Bearer ${userToken}` },
-          });
-
-          console.log(response)
+          })
 
           toast.success(
             `${loggedUserData.name.toUpperCase().trim()}, nova tecnologia adicionada.`
-          );
+          )
 
           setUsersTechSkills([
             ...usersTechSkills,
@@ -83,13 +79,10 @@ export const TechProvider = ({ children }) => {
   const editUsersTechSkill = async (formData) => {
 
     if (userToken) {
-      console.log(userToken)
-      console.log(formData)
-      console.log(techId)
 
       const edit = async () => {
         try {
-          const response = await api.put(`/users/techs/${techId}`, formData, {
+          const response = await api.put(`/users/techs/${tech.id}`, formData, {
             headers: { Authorization: `Bearer ${userToken}` },
           });
 
@@ -120,30 +113,25 @@ export const TechProvider = ({ children }) => {
 
   const techDelete = async (techId) => {
 
-    console.log(techId)
+    try {
+      const response = await api.delete(`/users/techs/${techId}`, {
+        headers: { Authorization: `Bearer ${userToken}` },
+      })
 
-      try {
-        const response = await api.delete(`/users/techs/${techId}`, {
-          headers: { Authorization: `Bearer ${userToken}` },
-        })
+      toast.success(
+        `${loggedUserData.name.toUpperCase().trim()}, tecnologia excluída.`
+      )
 
-        console.log(response);
-        console.log(usersTechSkills) 
+      setUsersTechSkills([
+        ...usersTechSkills,
+        loggedUserData.userTecs,
+      ])
 
-        toast.success(
-          `${loggedUserData.name.toUpperCase().trim()}, tecnologia excluída.`
-        )
-
-        setUsersTechSkills([
-          ...usersTechSkills,
-          loggedUserData.userTecs,
-        ])
-
-      } catch (error) {
-        console.log(error)
-      } finally {
-        setModal(false)
-      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setModal(false)
+    }
   }
 
   return (
@@ -155,7 +143,8 @@ export const TechProvider = ({ children }) => {
         modal, 
         setModal,
         editUsersTechSkill,
-        setTechId,
+        tech,
+        setTech,
         modalEdit, 
         setModalEdit,
         techDelete,

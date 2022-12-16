@@ -53,8 +53,8 @@ export const UserProvider = ({ children }) => {
       }, 4000)
 
     } catch (error) {
-      toast.error(error.response.data.message)
       console.log(error.response.data.message)
+      toast.error(error.response.data.message)
     } finally {
       setLoading(false)
     }

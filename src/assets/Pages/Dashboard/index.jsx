@@ -12,7 +12,7 @@ import { ModalEditTecnology } from "./ModalEdit"
 export const DashboardPage = () => {
 
   const { loggedUserData, logout } = useContext(UserContext);
-  const { registerUsersTechSkill, modal, setModal, editUsersTechSkill, modalEdit, setModalEdit } = useContext(TechContext)
+  const { registerUsersTechSkill, modal, setModal, editUsersTechSkill, modalEdit } = useContext(TechContext)
 
   return (
     <>

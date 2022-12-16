@@ -24,8 +24,6 @@ export const RegisterPage = () => {
 
   const submit = async (data) => {
   
-    console.log (data)
-
     await userRegister(data);
 
     reset({

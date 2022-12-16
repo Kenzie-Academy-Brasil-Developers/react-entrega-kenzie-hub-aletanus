@@ -12,11 +12,11 @@ import { StyledButton } from "../../../../Styles/buttons-style"
 export const ModalEditTecnology = () => {
 
     const [loading, setLoading] = useState(false); 
-    const { editUsersTechSkill, modalEdit, setModalEdit } = useContext(TechContext)
+    const { editUsersTechSkill, tech, setModalEdit } = useContext(TechContext)
     const { register, handleSubmit, formState: {errors}, reset } = useForm ({
         mode: "onChange",
         resolver: yupResolver(editTechSchema)
-    });
+    })
 
     const submit = async (newData) => {
 
@@ -43,7 +43,7 @@ export const ModalEditTecnology = () => {
 
             <StyledForm noValidate onSubmit={handleSubmit(submit)}>
 
-                <Input value="HTML" type="text" id="title" label="Nome do projeto" placeholder="Nome do projeto" register={register("title")} disabled={loading}/>
+                <Input value={`${tech.title}`} readOnly="readOnly" type="text" id="title" label="Nome do projeto" placeholder="Nome do projeto" register={register("title")} disabled={loading}/>
                 {errors.title && <p aria-label="Error: Title">{errors.title.message}</p>}
                 
                 <fieldset>

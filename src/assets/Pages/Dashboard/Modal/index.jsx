@@ -20,8 +20,6 @@ export const ModalCreateTecnology = () => {
 
     const submit = async (data) => {
 
-        console.log(data)
-
         registerUsersTechSkill (data)
         reset({
             title: "",
