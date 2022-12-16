@@ -174,17 +174,30 @@ export const StyledPageTemplate = styled.div`
         height: 100%;
     }
 
-    /* @media (min-width: 768px) {  
+    @media (min-width: 425px) {  
+        margin: 0px 10% 50px;
+    }
+
+    @media (min-width: 525px) {  
+        margin: 0px 15% 50px;
+    }
+
+    @media (min-width: 768px) {  
         margin: 0px 20% 50px;
+        header {
+            flex-direction: row;
+        } 
     }
 
     @media (min-width: 1024px) {
+        margin: 0px 25% 50px;
     }
 
-    @media (min-width: 2000px){
+    @media (min-width: 1200px){
+        margin: 0px 30% 50px;
     }
 
     @media (min-width: 2700px){
-    } */
+    }
 
 `

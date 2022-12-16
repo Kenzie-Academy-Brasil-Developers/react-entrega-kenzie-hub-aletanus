@@ -49,23 +49,4 @@ export const StyledRegister = styled.div`
         margin: 0 0 22px 0;
     }
 
-    /* @media (min-width: 1024px) {
-    }
-    @media (min-width: 2000px){
-
-    }
-    @media (min-width: 2700px){
-    } */
-
 `
-
-// export const StyledUl = styled.ul`
-    
-
-//     /* @media (min-width: 1024px){
-//     } 
-//     @media (min-width: 2000px){
-   
-//     } */
-    
-// `

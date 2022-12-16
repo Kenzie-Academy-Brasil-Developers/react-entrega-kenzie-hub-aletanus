@@ -38,12 +38,4 @@ export const StyledLoginPage = styled.div`
         margin: 0 0 22px 0;
     }
 
-
-    /* @media (min-width: 1024px) {
-    }
-    @media (min-width: 2000px){
-    }
-    @media (min-width: 2700px){
-    } */
-
 `
