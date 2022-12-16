@@ -42,8 +42,8 @@ export const ModalCreateTecnology = () => {
 
             <StyledForm noValidate onSubmit={handleSubmit(submit)}>
 
-                <Input type="text" id="title" label="Title " placeholder="Digite aqui o seu nome" register={register("title")} disabled={loading}/>
-                {errors.title && <p aria-label="Error: Title">{errors.title.message}</p>}
+                <Input type="text" id="title" label="Tecnologia" placeholder="Nome da tecnologia" register={register("title")} disabled={loading}/>
+                {errors.title && <p className="p-error" aria-label="Error: Title">{errors.title.message}</p>}
                 
                 <fieldset>
                     <label htmlFor="status">Selecionar status </label>

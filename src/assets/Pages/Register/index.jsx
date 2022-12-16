@@ -57,22 +57,22 @@ export const RegisterPage = () => {
         <StyledForm noValidate onSubmit={handleSubmit(submit)}>
                 
           <Input type="text" id="name" label="Nome " placeholder="Digite aqui o seu nome" register={register("name")} disabled={loading}/>
-          {errors.name && <p aria-label="Error: Name">{errors.name.message}</p>}
+          {errors.name && <p className="p-error" aria-label="Error: Name">{errors.name.message}</p>}
                 
           <Input type="email" id="email" label="E-mail " placeholder="Digite aqui o seu e-mail" register={register("email")} disabled={loading} />
-          {errors.email && <p aria-label="Error: E-mail">{errors.email.message}</p>}
+          {errors.email && <p className="p-error" aria-label="Error: E-mail">{errors.email.message}</p>}
                 
           <Input autoComplete="autoComplete" type="password" id="password" label="Senha " placeholder="Crie aqui a sua senha" register={register("password")} disabled={loading} />
-          {errors.password && <p aria-label="Error: Password">{errors.password.message}</p>}
+          {errors.password && <p className="p-error" aria-label="Error: Password">{errors.password.message}</p>}
                 
           <Input autoComplete="autoComplete" type="password" id="passwordConfirm" label="Confirmar Senha " placeholder="Confirme aqui a sua senha" register={register("passwordConfirm")} disabled={loading} />
-          {errors.passwordConfirm && <p aria-label="Error: Password Confirmation">{errors.passwordConfirm.message}</p>}
+          {errors.passwordConfirm && <p className="p-error" aria-label="Error: Password Confirmation">{errors.passwordConfirm.message}</p>}
                 
           <Input type="text" id="bio" label="Bio " placeholder="Fale sobre você" register={register("bio")} disabled={loading} />
-          {errors.bio && <p aria-label="Error: Bio text needed">{errors.bio.message}</p>}
+          {errors.bio && <p className="p-error" aria-label="Error: Bio text needed">{errors.bio.message}</p>}
                 
           <Input type="string" id="contact" label="Contato " placeholder="Opção de contato" register={register("contact")} disabled={loading} />
-          {errors.contact && <p aria-label="Error: contact">{errors.contact.message}</p>}
+          {errors.contact && <p className="p-error" aria-label="Error: contact">{errors.contact.message}</p>}
                 
           <fieldset>
             <label htmlFor="course_module">Módulo </label>

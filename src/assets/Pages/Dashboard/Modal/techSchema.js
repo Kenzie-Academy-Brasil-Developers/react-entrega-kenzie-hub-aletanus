@@ -4,8 +4,7 @@ export const techSchema = yup.object().shape({
 
     title: yup
     .string()
-    .required('O nome é obrigatório')
-    .min(3, "O nome precisa de ao menos 3 caracteres"),
+    .required('O nome é obrigatório'),
 
     status: yup.string().required("Selecione um status"),
 
