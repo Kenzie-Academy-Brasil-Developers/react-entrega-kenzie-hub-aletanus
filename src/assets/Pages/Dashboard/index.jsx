@@ -23,7 +23,7 @@ export const DashboardPage = () => {
         <Navbar buttonTitle="Sair" type="" onClick={(even) => logout(even)} />
         <Header
           username={`Olá, ${loggedUserData.name.toUpperCase().trim()}!`}
-          pDescription={`Cadastre e gerencie suas skills.`}
+          pDescription={`${loggedUserData.course_module}`}
           hidden={true}
           id="h2"
           className="p"
