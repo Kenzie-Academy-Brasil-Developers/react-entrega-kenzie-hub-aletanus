@@ -6,6 +6,8 @@ export const editTechSchema = yup.object().shape({
     .string(),
     // .required('O nome é obrigatório'),
 
-    status: yup.string().required("Selecione um status"),
+    status: yup
+    .string()
+    .required("Selecione um status"),
 
 })

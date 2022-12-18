@@ -9,58 +9,24 @@ export const TechContext = createContext()
 
 export const TechProvider = ({ children }) => {
 
-  const { loggedUserData, setloggedUserData, setLoading } = useContext(UserContext)
-  const [usersTechSkills, setUsersTechSkills] = useState([])
+  const { userToken, loggedUserData, usersTechSkills, setUsersTechSkills, } = useContext(UserContext)
   const [modal, setModal] = useState(false)
   const [modalEdit, setModalEdit] = useState(false)
   const [tech, setTech] = useState([])
-  const userToken = localStorage.getItem("@USER.TOKEN")
-  
-  console.log(loggedUserData)
-
-  useEffect(() => {
-    
-    if (userToken) {
-
-      const getApi = async () => {
-        try {
-          setLoading(true)
-          
-          const response = await api.get("/profile", {
-            headers: { Authorization: `Bearer ${userToken}` },
-          })
-
-          setloggedUserData (response.data)
-          setModal(false)
-
-        } catch (error) {
-          console.log(error)
-        } finally {
-          setLoading(false)
-        }
-      };
-      getApi()
-    }
-  }, [usersTechSkills])
+  api.defaults.headers.authorization = `Bearer ${userToken}`
 
   const registerUsersTechSkill = async (formData) => {
 
+    console.log(formData)
     if (userToken) {
-
-      const getApi = async () => {
+      const postTech = async () => {
         try {
-          const response = await api.post("/users/techs", formData, {
-            headers: { Authorization: `Bearer ${userToken}` },
-          })
-
+          const response = await api.post("/users/techs", formData)
           toast.success(
             `${loggedUserData.name.toUpperCase().trim()}, nova tecnologia adicionada.`
           )
-
-          setUsersTechSkills([
-            ...usersTechSkills,
-            loggedUserData.userTecs,
-          ]);
+         setUsersTechSkills([...usersTechSkills, response.data].sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase())))
+         
         } catch (error) {
           console.log(error)
           toast.success(
@@ -70,63 +36,42 @@ export const TechProvider = ({ children }) => {
           setModal(false)
         }
       }
-      getApi()
-    } else {
-      // navigate ("/")
+      postTech()
     }
   }
 
-  const editUsersTechSkill = async (formData) => {
+  const editUsersTechSkill = async (editedTechSkill) => {
 
     if (userToken) {
 
-      const edit = async () => {
+      const editTech = async () => {
+
         try {
-          const response = await api.put(`/users/techs/${tech.id}`, formData, {
-            headers: { Authorization: `Bearer ${userToken}` },
-          });
-
-          console.log(response)
-
-          toast.success(
-            `${loggedUserData.name.toUpperCase().trim()}, tecnologia editada!`
-          );
-
-          setUsersTechSkills([
-            ...usersTechSkills,
-            loggedUserData.userTecs,
-          ]);
+          const response = await api.put(`/users/techs/${tech.id}`, editedTechSkill)
+          toast.success (`${loggedUserData.name.toUpperCase().trim()}, tecnologia editada!`)
+          const uneditedTechSkills = usersTechSkills.filter (skill => skill.title !== editedTechSkill.title)
+          setUsersTechSkills ([...uneditedTechSkills, response.data].sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase())))
         } catch (error) {
           console.log(error)
-          toast.success(
-            `${loggedUserData.name.toUpperCase().trim()}, ${error.response.data.message}.`
-          )
+          console.log(error.response)
+          toast.success(`${loggedUserData.name.toUpperCase().trim()}, ${error.response.data.message}.`)
         } finally {
           setModalEdit(false)
         }
       }
-      edit()
-    } else {
-      // navigate ("/")
+      editTech()
     }
   }
 
   const techDelete = async (techId) => {
 
     try {
-      const response = await api.delete(`/users/techs/${techId}`, {
-        headers: { Authorization: `Bearer ${userToken}` },
-      })
-
+      const response = await api.delete(`/users/techs/${techId}`)
       toast.success(
         `${loggedUserData.name.toUpperCase().trim()}, tecnologia excluída.`
       )
-
-      setUsersTechSkills([
-        ...usersTechSkills,
-        loggedUserData.userTecs,
-      ])
-
+      const newTechSkills = usersTechSkills.filter (skill => skill.id !== techId)
+      setUsersTechSkills(newTechSkills)
     } catch (error) {
       console.log(error)
     } finally {
@@ -138,8 +83,6 @@ export const TechProvider = ({ children }) => {
     <TechContext.Provider
       value={{
         registerUsersTechSkill,
-        usersTechSkills, 
-        setUsersTechSkills,
         modal, 
         setModal,
         editUsersTechSkill,

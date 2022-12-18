@@ -38,4 +38,4 @@ export const StyledLoginPage = styled.div`
         margin: 0 0 22px 0;
     }
 
-`;
+`

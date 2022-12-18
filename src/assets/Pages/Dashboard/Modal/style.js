@@ -57,5 +57,29 @@ export const StyledModalCreateTecnology = styled.div`
         line-height: var(--font-line-height-1);
         margin: 22px 0;
     }
+
+    @media (min-width: 768px) {  
+        div {
+            width: 40%;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        div {
+            width: 30%;
+        }
+    }
+
+    @media (min-width: 1440px){
+        div {
+            width: 25%;
+        }
+    }
+
+    @media (min-width: 2200px){
+        div {
+            width: 20%;
+        }
+    }
     
 `

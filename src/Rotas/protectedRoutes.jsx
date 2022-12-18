@@ -4,15 +4,10 @@ import { UserContext } from "../Context/userContext"
 
 export const ProtectedRoutes = () => { 
 
-    const { loggedUserData } = useContext(UserContext)
+    const { loggedUserData, loading } = useContext(UserContext)
 
-    return (
-
-        <>
-        { 
-            loggedUserData ? <Outlet/> : <Navigate to={ "/" } />
-        }
-        </>
-    )
-    
+    if(loading) {
+        return null
+    }
+    return loggedUserData ? (<Outlet/>) : (<Navigate to= "/" replace />)   
 }

@@ -48,5 +48,5 @@ export const TechSkill = ({
         </div>
       </div>
     </li>
-  );
-};
+  )
+}

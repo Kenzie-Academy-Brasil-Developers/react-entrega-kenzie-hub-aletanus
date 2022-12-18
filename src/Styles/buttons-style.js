@@ -57,7 +57,7 @@ export const StyledButton = styled.button`
         border: solid 1px var(--grey-2);
     }
 
-`;
+`
 
 export const StyledLink = styled(Link)`
         

@@ -11,7 +11,7 @@ import { StyledButton } from "../../../../Styles/buttons-style"
 
 export const ModalEditTecnology = () => {
 
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false)
     const { editUsersTechSkill, tech, setModalEdit } = useContext(TechContext)
     const { register, handleSubmit, formState: {errors}, reset } = useForm ({
         mode: "onChange",
@@ -21,7 +21,6 @@ export const ModalEditTecnology = () => {
     const submit = async (newData) => {
 
         editUsersTechSkill (newData)
-
         reset({
             title: "",
             status: "",
